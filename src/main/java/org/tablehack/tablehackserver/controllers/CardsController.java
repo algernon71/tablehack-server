@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.tablehack.tablehackserver.db.CardsRespository;
 import org.tablehack.tablehackserver.db.entities.Card;
 
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "http://localhost:4300")
 @RestController
 @RequestMapping("/api/cards")
 public class CardsController {
@@ -25,7 +25,7 @@ public class CardsController {
 	
 	@GetMapping
 	public 
-	List<Card> getCards(@RequestParam(name = "type", required = false) String type) {
+	List<Card> getCards(@RequestParam(name = "type", required = false) String type, @RequestParam(name = "search", required = false) String search) {
 		if (type == null) {
 			return cards.findAll();
 		} else {

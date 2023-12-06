@@ -14,10 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.tablehack.tablehackserver.db.DecksRespository;
-import org.tablehack.tablehackserver.db.entities.Card;
 import org.tablehack.tablehackserver.db.entities.Deck;
 
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "http://localhost:4300")
 @RestController
 @RequestMapping("/api/decks")
 public class DecksController {

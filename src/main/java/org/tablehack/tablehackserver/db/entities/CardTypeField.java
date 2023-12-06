@@ -11,11 +11,10 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class DeckEntry implements Serializable {
+public class CardTypeField implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-    private long cardId;
-	
-	private int count;
-	
+    private String id;
+    private String name;
+    private String type;
 }

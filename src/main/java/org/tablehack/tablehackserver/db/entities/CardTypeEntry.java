@@ -1,6 +1,7 @@
 package org.tablehack.tablehackserver.db.entities;
 
 import java.io.Serializable;
+import java.util.Map;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -11,11 +12,11 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class DeckEntry implements Serializable {
+public class CardTypeEntry implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-    private long cardId;
+    private String type;
 	
-	private int count;
+	private Map<String, Object> properties;
 	
 }
