@@ -77,11 +77,15 @@ public class CardTypesController {
 	}
 	
 	void bootStrap() {
-	    addType("action", "Handling", fields(field("icon", "icon", "Symbol")), entries(entry("symbol")));
-        addType("event", "Händelse", fields(field("icon", "icon", "Symbol")), entries(entry("symbol")));
-        addType("monster", "Monster", fields(field("icon", "icon", "Symbol")), entries(entry("symbol")));
-        addType("search", "Sökresultat", fields(field("icon", "icon", "Symbol")), entries(entry("symbol")));
-        addType("treasure", "Skatt", fields(field("icon", "icon", "Symbol")), entries(entry("symbol")));
+	    addType("action", "Handling", "Handlingar", fields(field("icon", "icon", "Symbol")), 
+	    		entries(entry("thlogo"), entry("name"), entry("description")));
+        addType("event", "Händelse", "Händelser", fields(field("icon", "icon", "Symbol")), entries(entry("symbol")));
+        addType("monster", "Monster", "Monster",fields(field("icon", "icon", "Symbol")), entries(entry("symbol")));
+        addType("search", "Sökresultat", "Sökresultat",fields(field("icon", "icon", "Symbol")), entries(entry("symbol")));
+        addType("treasure", "Skatt", "Skatter", fields(field("icon", "icon", "Symbol")), 
+        		entries(entry("symbol")));
+	    addType("spell", "Trollformel", "Trollformler", fields(field("symbol", "symbol", "Symbol"), field("cost", "text", "Cost"), field("attack", "attack", "Skada")), 
+	    		entries(entry("thlogo"), entry("name"), entry("symbol"), entry("description")));
 	}
 	
 	CardTypeEntry entry(String type) {
@@ -101,13 +105,14 @@ public class CardTypesController {
 	CardTypeEntryList entries(CardTypeEntry ... entries) {
 	    return new CardTypeEntryList(entries);
 	}
-    CardTypeFieldList fields(CardTypeField entries) {
+    CardTypeFieldList fields(CardTypeField ... entries) {
         return new CardTypeFieldList(entries);
     }
-	void addType(String id, String name, CardTypeFieldList fields , CardTypeEntryList entries ) {
+	void addType(String id, String name, String namePlural, CardTypeFieldList fields , CardTypeEntryList entries ) {
 	    CardType type = CardType.builder()
 	            .id(id)
 	            .name(name)
+	            .namePlural(namePlural)
 	            .fields(fields)
 	            .entries(entries)
 	            

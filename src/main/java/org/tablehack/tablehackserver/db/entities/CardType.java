@@ -24,6 +24,7 @@ public class CardType {
 	private String size;
 
 	private String name;
+	private String namePlural;
 	private String description;
 	private String template;
 
