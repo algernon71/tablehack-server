@@ -40,6 +40,7 @@ public class ResourceEntry implements Resource {
 	private String mimeType;
 	
 	@Lob
+	@Column(length = 10000000)
 	private byte data[];
 
 	public

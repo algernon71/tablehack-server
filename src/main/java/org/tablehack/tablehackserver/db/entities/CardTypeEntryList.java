@@ -8,10 +8,10 @@ public class CardTypeEntryList extends ArrayList<CardTypeEntry>{
 
     public CardTypeEntryList() {
     }
-    public CardTypeEntryList(CardTypeEntry ... entries) {
+    public CardTypeEntryList(CardTypeEntry.CardTypeEntryBuilder ... entries) {
         if (entries != null) {
-            for (CardTypeEntry entry : entries) {
-                add(entry);
+            for (CardTypeEntry.CardTypeEntryBuilder entry : entries) {
+                add(entry.build());
             }
         }
     }

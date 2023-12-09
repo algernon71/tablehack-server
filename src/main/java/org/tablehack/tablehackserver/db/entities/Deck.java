@@ -21,11 +21,19 @@ public class Deck {
 	private long id;
 	
 	
+	private String reference;
 	private String name;
 	private String type;
+	private String symbol;
 	
 	@Convert(converter = DeckEntryListConverter.class)
 	DeckEntryList entries = new DeckEntryList();
 	
+	public
+	int getCardCount() {
+		return entries.stream()
+				.map(DeckEntry::getCount)
+				.reduce(0, Integer::sum);
+	}
 	
 }
