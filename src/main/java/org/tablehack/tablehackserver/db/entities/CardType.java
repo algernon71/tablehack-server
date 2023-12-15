@@ -33,6 +33,10 @@ public class CardType {
     @Lob
     CardTypeEntryList entries;
     
+    @Convert(converter = CardTypeEntryListConverter.class)
+    @Lob
+    CardTypeEntryList frontEntries;
+    
     @Lob
     @Convert(converter = CardTypeFieldListConverter.class)
     CardTypeFieldList fields;

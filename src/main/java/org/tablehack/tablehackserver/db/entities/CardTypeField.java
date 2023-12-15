@@ -17,6 +17,7 @@ public class CardTypeField implements Serializable {
     private String id;
     private String name;
     private String type;
+    int minCount;
     int maxCount;
     
 }

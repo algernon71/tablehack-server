@@ -75,33 +75,40 @@ public class CardTypesController {
 	void emptyDb() {
 	    types.deleteAll();
 	}
+	CardTypeEntryList defaultBackEntries = entries(entry("name"));
+	CardTypeEntryList defaultFrontEntries = entries(entry("thlogo"), entry("deck-type"), entry("deck-symbol") );
 	
 	void bootStrap() {
-	    addType("action", "Handling", "Handlingar", 
+	    add(cardType("action", "Handling", "Handlingar", 
 	    		fields(field("icon", "icon", "Symbol"), 
-	    				field("action", "Handling").maxCount(3)), 
+	    				field("actions", "Handling").maxCount(3)), 
 	    		entries(entry("thlogo"), entry("name"), 
 	    				entry("description"), 
-	    				entry("action")));
-        addType("event", "Händelse", "Händelser", 
+	    				entry("actions"))));
+        add(cardType("event", "Händelse", "Händelser", 
         		fields(field("icon", "Symbol")), 
-        		entries(entry("name"), entry("symbol"),entry("description")));
-        addType("monster", "Monster", "Monster",
-        		fields(field("image", "image", "Symbol")), entries(entry("symbol")));
-        addType("monster-actions", "Monsterhandling", "Monsterhandlingar",
-        		fields(field("image", "image", "Symbol")), entries(entry("symbol")));
-        addType("search", "Sökresultat", "Sökresultat",
-        		fields(field("symbol", "symbol", "Symbol")), entries(entry("name"), entry("symbol"), entry("description")));
-        addType("treasure", "Skatt", "Skatter", fields(field("icon", "icon", "Symbol")), 
-        		entries(entry("symbol")));
-        addType("potions", "Dryck", "Drycker",
-        		fields(field("image", "image", "Symbol")), entries(entry("name"), entry("description"), entry("spacer")));
-        addType("item", "Föremål", "Föremål",
-        		fields(field("image", "image", "Symbol")), entries(entry("symbol")));
-        addType("weapon", "Vapen", "Vapen",
-        		fields(field("image", "image", "Symbol")), entries(entry("symbol")));
-	    addType("spell", "Trollformel", "Trollformler", fields(field("symbol", "symbol", "Symbol"), field("cost", "text", "Cost"), field("attack", "attack", "Skada")), 
-	    		entries(entry("thlogo"), entry("name"), entry("symbol"), entry("description")));
+        		entries(entry("name"), entry("symbol"),entry("description"))));
+        add(cardType("monster", "Monster", "Monster",
+        		fields(field("image"), field("mstats")), 
+        		entries(entry("card-reference"),entry("name"), entry("mstats"), entry("image"), entry("resistences")))
+        		.frontEntries(entries(entry("thlogo"), entry("card-reference"), entry("name"),entry("image"))));
+        add(cardType("monster-actions", "Handling", "Monsterhandlingar",
+        		fields(field("actions")), 
+        		entries(entry("thlogo"), entry("name"), entry("symbol"), entry("actions")))
+        		.frontEntries(entries(entry("thlogo"), entry("deck-type"),entry("deck-name"), entry("deck-symbol") )));
+        
+        add(cardType("search", "Sökresultat", "Sökresultat",
+        		fields(field("symbol", "symbol", "Symbol")), entries(entry("name"), entry("symbol"), entry("description"))));
+        add(cardType("treasure", "Skatt", "Skatter", fields(field("icon", "icon", "Symbol")), 
+        		entries(entry("symbol"))));
+        add(cardType("potions", "Dryck", "Drycker",
+        		fields(field("image", "image", "Symbol")), entries(entry("name"), entry("description"), entry("spacer"))));
+        add(cardType("item", "Föremål", "Föremål",
+        		fields(field("image", "image", "Symbol")), entries(entry("symbol"))));
+        add(cardType("weapon", "Vapen", "Vapen",
+        		fields(field("image", "image", "Symbol")), entries(entry("symbol"))));
+	    add(cardType("spell", "Trollformel", "Trollformler", fields(field("symbol", "symbol", "Symbol"), field("cost", "text", "Cost"), field("attack", "attack", "Skada")), 
+	    		entries(entry("thlogo"), entry("name"), entry("symbol"), entry("description"))));
 	}
 	
 	CardTypeEntry.CardTypeEntryBuilder entry(String type) {
@@ -127,6 +134,9 @@ public class CardTypesController {
     CardTypeField.CardTypeFieldBuilder field(String id, String type, String name) {
     	return field(id, type, name, 1);
     }
+    CardTypeField.CardTypeFieldBuilder field(String type) {
+    	return field(type, type, type, 1);
+    }
     CardTypeField.CardTypeFieldBuilder field(String type, String name) {
     	return field(type, type, name, 1);
     }
@@ -134,6 +144,8 @@ public class CardTypesController {
 	CardTypeEntryList entries(CardTypeEntry.CardTypeEntryBuilder ... entries) {
 	    return new CardTypeEntryList(entries);
 	}
+	
+	
     CardTypeFieldList fields(CardTypeField.CardTypeFieldBuilder ... entries) {
         return new CardTypeFieldList(entries);
     }
@@ -148,5 +160,25 @@ public class CardTypesController {
 	            .build();
 	    
 	    types.save(type);
+	}
+	void add(CardType.CardTypeBuilder type) {
+		types.save(type.build());
+	}
+	
+	CardType.CardTypeBuilder cardType(String id, String name, String namePlural, CardTypeFieldList fields , CardTypeEntryList entries ) {
+	    return CardType.builder()
+	            .id(id)
+	            .name(name)
+	            .namePlural(namePlural)
+	            .fields(fields)
+	            .entries(entries) 
+	            .frontEntries(defaultFrontEntries);
+	}
+	CardType.CardTypeBuilder cardType(String id, String name, String namePlural) {
+	    return CardType.builder()
+	            .id(id)
+	            .name(name)
+	            .namePlural(namePlural)
+	            .frontEntries(defaultFrontEntries);
 	}
 }

@@ -1,6 +1,0 @@
-2023-12-09 23:22:40 jdbc[5]: exception
-org.h2.jdbc.JdbcSQLDataException: Value too long for column "ENTRIES CHARACTER VARYING(255)": "U&'[ {\\000d\\000a  ""cardId"" : 3,\\000d\\000a  ""count"" : 1\\000d\\000a}, {\\000d\\000a  ... (274)"; SQL statement:
-update decks set entries=?,name=?,symbol=?,type=? where id=? [22001-214]
-2023-12-09 23:23:15 jdbc[13]: exception
-org.h2.jdbc.JdbcSQLDataException: Value too long for column "ENTRIES CHARACTER VARYING(255)": "U&'[ {\\000d\\000a  ""cardId"" : 3,\\000d\\000a  ""count"" : 1\\000d\\000a}, {\\000d\\000a  ... (313)"; SQL statement:
-update decks set entries=?,name=?,symbol=?,type=? where id=? [22001-214]

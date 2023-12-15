@@ -16,5 +16,12 @@ public class CardTypeEntryList extends ArrayList<CardTypeEntry>{
         }
     }
     
+    public void add(CardTypeEntry.CardTypeEntryBuilder ... entries) {
+        if (entries != null) {
+            for (CardTypeEntry.CardTypeEntryBuilder entry : entries) {
+                add(entry.build());
+            }
+        }
+    }
     
 }
