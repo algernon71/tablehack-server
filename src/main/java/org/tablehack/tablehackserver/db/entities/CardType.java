@@ -29,6 +29,7 @@ public class CardType {
 	private String description;
 	private String template;
 
+    
     @Convert(converter = CardTypeEntryListConverter.class)
     @Lob
     CardTypeEntryList entries;
@@ -40,4 +41,8 @@ public class CardType {
     @Lob
     @Convert(converter = CardTypeFieldListConverter.class)
     CardTypeFieldList fields;
+    
+    @Lob
+    @Convert(converter = CardTypeFieldListConverter.class)
+    CardTypeFieldList columns;
 }

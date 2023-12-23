@@ -1,6 +1,7 @@
 package org.tablehack.tablehackserver.db.entities;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Map;
 
 import lombok.AllArgsConstructor;
@@ -19,5 +20,6 @@ public class CardTypeEntry implements Serializable {
     private String fieldId;
 	
 	private Map<String, Object> properties;
+	private List<List<CardTypeEntry>> columns;
 	
 }

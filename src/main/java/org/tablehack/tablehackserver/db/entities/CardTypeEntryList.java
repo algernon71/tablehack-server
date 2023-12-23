@@ -15,6 +15,13 @@ public class CardTypeEntryList extends ArrayList<CardTypeEntry>{
             }
         }
     }
+    public CardTypeEntryList(String ... entries) {
+        if (entries != null) {
+            for (String entry : entries) {
+                add(CardTypeEntry.builder().type(entry).fieldId(entry).build());
+            }
+        }
+    }
     
     public void add(CardTypeEntry.CardTypeEntryBuilder ... entries) {
         if (entries != null) {

@@ -16,5 +16,12 @@ public class CardTypeFieldList extends ArrayList<CardTypeField>{
         }
     }
     
+    public CardTypeFieldList(String ... fields) {
+        if (fields != null) {
+            for (String field : fields) {
+                add(CardTypeField.builder().id(field).name(field).type(field).build());
+            }
+        }
+    }
     
 }

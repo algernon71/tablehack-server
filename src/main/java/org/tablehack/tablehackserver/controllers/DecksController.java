@@ -25,12 +25,8 @@ public class DecksController {
 	
 	@GetMapping
 	public 
-	List<Deck> getDecks(@RequestParam(name = "type", required = false) String type) {
-		if (type == null) {
-			return decks.findAll();
-		} else {
-			return decks.findByType(type);
-		}
+	List<Deck> getDecks(@RequestParam(name = "type", required = false) String type, @RequestParam(name = "require-reference", defaultValue = "false", required = false) boolean requireReference) {
+		return decks.search(type, requireReference ? "" : null);
 	}
 	
 	@GetMapping("/{deckId}")
