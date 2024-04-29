@@ -81,8 +81,10 @@ public class CardTypesController {
 	
 	void bootStrap() {
 	    add(cardType("action", "Handling", "Handlingar", 
-	    		fields("name", "orientation", "description", "symbol", "actions"), 
-	    		entries("thlogo", "name", "description","actions")));
+	    		fields("name", "card-level", "orientation", "description", "symbol", "actions"), 
+	    		entries("thlogo", "name", "description","actions"))
+	    		.frontEntries(entries("thlogo", "deck-type", "deck-symbol", "deck-name", "card-level")))
+	    ;
         add(cardType("event", "Händelse", "Händelser", 
 	    		fields("name","description", "symbol", "actions"), 
         		entries("name", "symbol", "description")));
@@ -91,8 +93,12 @@ public class CardTypesController {
         		entries("card-reference","name","mstats","image","resistences"))
         		.frontEntries(entries("thlogo","card-reference","name", "image")));
         add(cardType("monster-actions", "Handling", "Monsterhandlingar",
-	    		fields("name","icon", "actions"), 
-        		entries("thlogo","name","symbol","actions"))
+	    		fields("name","icon", "description", "actions"), 
+        		entries("thlogo","name","symbol","description", "actions"))
+        		.frontEntries(entries("thlogo","deck-type","deck-name","deck-symbol") ));
+        add(cardType("monster-passive", "Passiv", "Passiva monster",
+	    		fields("name","icon", "alertness", "description"), 
+        		entries("thlogo","name","symbol","alertness", "description"))
         		.frontEntries(entries("thlogo","deck-type","deck-name","deck-symbol") ));
         
         add(cardType("search", "Sökresultat", "Sökresultat",
@@ -114,8 +120,9 @@ public class CardTypesController {
 	    		fields("name","symbol", "actions"), 
 	    		entries("thlogo","name","symbol","description")));
 	    add(cardType("character", "Karaktär", "Karaktärer") 
-	    		.fields(fields("name","image", "bio", "stats")) 
-	    		.entries(entries(entry("thlogo"), entry("name"), entry("image"),entry("bio"), entry("stats"), entry("levels")))
+	    		.fields(fields("name","image","description", "bio", "stats")) 
+	    		.entries(entries(entry("thlogo"), entry("name-large"), entry("image"),entry("bio"), entry("stats"), entry("levels")))
+	    		.frontEntries(entries("thlogo","name-large","big-image", "description") )
 	    		.size("large"));
 	}// entries(entry("thlogo"), entry("name"), entry("image"),entry("bio")), 
 	

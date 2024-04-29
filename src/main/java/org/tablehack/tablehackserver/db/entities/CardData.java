@@ -15,28 +15,26 @@ import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Data;
+import java.io.Serializable;
 
-@Entity
-@Table(name = "cards", indexes = {
-		@Index(name="type_index", columnList = "type")
-})
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 @Data
-public class Card {
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long id;
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+public class CardData {
 
 	private String reference;
-	private String level;
 	private String name;
 	private String type;
 	private String orientation;
 	
-	@Column
 	private Boolean horizontal = true;
 	private String description;
 
-	@Convert(converter = JSONDataConverter.class)
-	@Lob
 	JSONData data;
 }

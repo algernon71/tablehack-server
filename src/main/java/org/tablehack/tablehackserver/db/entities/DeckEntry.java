@@ -2,6 +2,8 @@ package org.tablehack.tablehackserver.db.entities;
 
 import java.io.Serializable;
 
+import org.tablehack.tablehackserver.db.JSONData;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -17,5 +19,6 @@ public class DeckEntry implements Serializable {
     private long cardId;
 	
 	private int count;
+	JSONData data;
 	
 }

@@ -7,6 +7,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Lob;
 import jakarta.persistence.Table;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -27,6 +28,7 @@ public class Deck {
 	private String symbol;
 	
 	@Convert(converter = DeckEntryListConverter.class)
+	@Lob
 	DeckEntryList entries = new DeckEntryList();
 	
 	public
