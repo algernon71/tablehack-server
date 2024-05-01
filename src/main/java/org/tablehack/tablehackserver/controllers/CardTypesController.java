@@ -91,15 +91,19 @@ public class CardTypesController {
         add(cardType("monster", "Monster", "Monster",
 	    		fields("reference","name","image", "description", "mstats"), 
         		entries("card-reference","name","mstats","image","resistences"))
-        		.frontEntries(entries("thlogo","card-reference","name", "image")));
+        		.frontEntries(entries("thlogo","card-reference","name", "deck-symbol", "image")));
         add(cardType("monster-actions", "Handling", "Monsterhandlingar",
 	    		fields("name","icon", "description", "actions"), 
         		entries("thlogo","name","symbol","description", "actions"))
-        		.frontEntries(entries("thlogo","deck-type","deck-name","deck-symbol") ));
+        		.frontEntries(entries("thlogo","deck-type", "deck-image","deck-name") ));
         add(cardType("monster-passive", "Passiv", "Passiva monster",
 	    		fields("name","icon", "alertness", "description"), 
         		entries("thlogo","name","symbol","alertness", "description"))
         		.frontEntries(entries("thlogo","deck-type","deck-name","deck-symbol") ));
+        add(cardType("markers", "Markör", "Markörer",
+                fields("name","icon", "image", "description"), 
+                entries("name","image","description"))
+                .frontEntries(entries("name","icon","image") ));
         
         add(cardType("search", "Sökresultat", "Sökresultat",
 	    		fields("name","symbol", "description", "actions"), 

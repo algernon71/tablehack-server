@@ -44,5 +44,9 @@ public class CardType {
     
     @Lob
     @Convert(converter = CardTypeFieldListConverter.class)
+    CardTypeFieldList deckFields;
+    
+    @Lob
+    @Convert(converter = CardTypeFieldListConverter.class)
     CardTypeFieldList columns;
 }

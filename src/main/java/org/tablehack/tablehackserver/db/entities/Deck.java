@@ -26,6 +26,7 @@ public class Deck {
 	private String name;
 	private String type;
 	private String symbol;
+    private String image;
 	
 	@Convert(converter = DeckEntryListConverter.class)
 	@Lob
