@@ -76,6 +76,7 @@ public class CardTypesController {
 	    types.deleteAll();
 	}
 	CardTypeFieldList defaultColumns = new CardTypeFieldList();
+    CardTypeFieldList defaultDeckFields = fields("reference", "name", "symbol");
 	CardTypeEntryList defaultBackEntries = entries("name");
 	CardTypeEntryList defaultFrontEntries = entries("thlogo","deck-type","deck-symbol" );
 	
@@ -83,8 +84,8 @@ public class CardTypesController {
 	    add(cardType("action", "Handling", "Handlingar", 
 	    		fields("name", "card-level", "orientation", "description", "symbol", "actions"), 
 	    		entries("thlogo", "name", "description","actions"))
-	    		.frontEntries(entries("thlogo", "deck-type", "deck-symbol", "deck-name", "card-level")))
-	    ;
+	    		.frontEntries(entries("thlogo", "deck-type", "deck-symbol", "deck-name", "card-level"))
+	    		.columns(fields("level")));
         add(cardType("event", "Händelse", "Händelser", 
 	    		fields("name","description", "symbol", "actions"), 
         		entries("name", "symbol", "description")));
@@ -103,6 +104,8 @@ public class CardTypesController {
         add(cardType("markers", "Markör", "Markörer",
                 fields("name","icon", "image", "description"), 
                 entries("name","image","description"))
+                .deckFields(fields("name", "image"))
+
                 .frontEntries(entries("name","icon","image") ));
         
         add(cardType("search", "Sökresultat", "Sökresultat",
@@ -125,9 +128,10 @@ public class CardTypesController {
 	    		entries("thlogo","name","symbol","description")));
 	    add(cardType("character", "Karaktär", "Karaktärer") 
 	    		.fields(fields("name","image","description", "bio", "stats")) 
-	    		.entries(entries(entry("thlogo"), entry("name-large"), entry("image"),entry("bio"), entry("stats"), entry("levels")))
+	    		.entries(entries(entry("thlogo"), columnsEntry(entries("name-large", "bio"), entries("image")), entry("stats"), entry("levels")))
 	    		.frontEntries(entries("thlogo","name-large","big-image", "description") )
 	    		.size("large"));
+	    ;
 	}// entries(entry("thlogo"), entry("name"), entry("image"),entry("bio")), 
 	
 	CardTypeEntry.CardTypeEntryBuilder entry(String type) {
@@ -207,13 +211,17 @@ public class CardTypesController {
 	            .fields(fields)
 	            .entries(entries) 
 	            .frontEntries(defaultFrontEntries)
+	            .deckFields(defaultDeckFields)
 	            .columns(defaultColumns);
 	}
+	
 	CardType.CardTypeBuilder cardType(String id, String name, String namePlural) {
 	    return CardType.builder()
 	            .id(id)
 	            .name(name)
 	            .namePlural(namePlural)
-	            .frontEntries(defaultFrontEntries);
+	            .frontEntries(defaultFrontEntries)
+	            .deckFields(defaultDeckFields)
+	            .columns(defaultColumns);
 	}
 }
