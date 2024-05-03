@@ -121,8 +121,10 @@ public class CardTypesController {
 	    		fields("name","symbol", "description"), 
         		entries("symbol")));
         add(cardType("weapon", "Vapen", "Vapen",
-	    		fields("name","symbol", "description"), 
-        		entries("symbol")));
+	    		fields("name","card-reference", "symbol", "description"), 
+        		entries("name", "symbol", "description"))
+        		.frontEntries(entries("thlogo","deck-name", "deck-symbol") )
+        		.columns(fields("card-reference")));
 	    add(cardType("spell", "Trollformel", "Trollformler", 
 	    		fields("name","symbol", "actions"), 
 	    		entries("thlogo","name","symbol","description")));
