@@ -76,11 +76,29 @@ public class CardTypesController {
 	    types.deleteAll();
 	}
 	CardTypeFieldList defaultColumns = new CardTypeFieldList();
-    CardTypeFieldList defaultDeckFields = fields("reference", "name", "symbol");
+    CardTypeFieldList defaultDeckFields = fields("reference", "name", "symbol", "image", "deck-image");
 	CardTypeEntryList defaultBackEntries = entries("name");
 	CardTypeEntryList defaultFrontEntries = entries("thlogo","deck-type","deck-symbol" );
 	
 	void bootStrap() {
+        add(cardType("character", "Karaktär", "Karaktärer") 
+                .fields(fields(
+                        field("name"),
+                        field("image"),
+                        field("description"),
+                        field("intro", "intro"),
+                        field("start-equipment", "text", "Startutrustning"),
+                        field("limitations", "text", "Begränsningar"),
+                        field("bio"), 
+                        field("stats"))) 
+                .entries(entries(entry("thlogo"), columnsEntry(entries("name-large", "bio"), entries("image")), 
+                        entry("stats"), 
+                        entry("levels"), 
+                        columnsEntry(entries(entry("text", "limitations", "Begränsningar")), 
+                        entries(entry("text", "start-equipment", "Startutrustning")))))
+                .frontEntries(entries("thlogo","name-large","big-image", "intro") )
+                .size("large"));
+        
 	    add(cardType("action", "Handling", "Handlingar", 
 	    		fields("name", "card-level", "orientation", "description", "symbol", "actions"), 
 	    		entries("thlogo", "name", "description","actions"))
@@ -90,17 +108,22 @@ public class CardTypesController {
 	    		fields("name","description", "symbol", "actions"), 
         		entries("name", "symbol", "description")));
         add(cardType("monster", "Monster", "Monster",
-	    		fields("reference","name","image", "description", "mstats"), 
+	    		fields("card-reference","name","image", "description", "mstats"), 
         		entries("card-reference","name","mstats","image","resistences"))
-        		.frontEntries(entries("thlogo","card-reference","name", "deck-symbol", "image")));
+        		.frontEntries(entries("thlogo","card-reference","name", "image"))
+        		.columns(fields("card-reference")));
+        add(cardType("level", "Nivå", "Nivåkort",
+                fields("name","description"), 
+                entries("name","description"))
+                .frontEntries(entries("thlogo","deck-name", "deck-symbol")));
         add(cardType("monster-actions", "Handling", "Monsterhandlingar",
 	    		fields("name","icon", "description", "actions"), 
         		entries("thlogo","name","symbol","description", "actions"))
-        		.frontEntries(entries("thlogo","deck-type", "deck-image","deck-name") ));
+        		.frontEntries(entries("thlogo","deck-type", "deck-name", "deck-image") ));
         add(cardType("monster-passive", "Passiv", "Passiva monster",
 	    		fields("name","icon", "alertness", "description"), 
         		entries("thlogo","name","symbol","alertness", "description"))
-        		.frontEntries(entries("thlogo","deck-type","deck-name","deck-symbol") ));
+                .frontEntries(entries("thlogo","deck-type","deck-name", "deck-image") ));
         add(cardType("markers", "Markör", "Markörer",
                 fields("name","icon", "image", "description"), 
                 entries("name","image","description"))
@@ -108,46 +131,38 @@ public class CardTypesController {
 
                 .frontEntries(entries("name","icon","image") ));
         
+        add(cardType("room", "Rum", "Rumskort",
+                fields("name","level", "description"), 
+                entries("room-name","room-level","room-image"))
+                .frontEntries(entries("room-name","room-level") ));
         add(cardType("search", "Sökresultat", "Sökresultat",
 	    		fields("name","symbol", "description", "actions"), 
         		entries("name","symbol","description")));
-        add(cardType("treasure", "Skatt", "Skatter", 
-	    		fields("name","symbol", "description"), 
-        		entries("symbol")));
         add(cardType("potions", "Dryck", "Drycker",
 	    		fields("name","symbol", "actions"), 
         		entries("name","description","spacer")));
-        add(cardType("item", "Föremål", "Föremål",
-	    		fields("name","symbol", "description"), 
-        		entries("symbol")));
-        add(cardType("weapon", "Vapen", "Vapen",
+        add(cardType("weapon", "Föremål", "Föremål",
 	    		fields("name","card-reference", "symbol", "description"), 
         		entries("name", "symbol", "description"))
         		.frontEntries(entries("thlogo","deck-name", "deck-symbol") )
         		.columns(fields("card-reference")));
-	    add(cardType("spell", "Trollformel", "Trollformler", 
-	    		fields("name","symbol", "actions"), 
-	    		entries("thlogo","name","symbol","description")));
-	    add(cardType("character", "Karaktär", "Karaktärer") 
-	    		.fields(fields("name","image","description", "bio", "stats")) 
-	    		.entries(entries(entry("thlogo"), columnsEntry(entries("name-large", "bio"), entries("image")), entry("stats"), entry("levels")))
-	    		.frontEntries(entries("thlogo","name-large","big-image", "description") )
-	    		.size("large"));
 	    ;
 	}// entries(entry("thlogo"), entry("name"), entry("image"),entry("bio")), 
 	
 	CardTypeEntry.CardTypeEntryBuilder entry(String type) {
-	    return CardTypeEntry.builder()
-	            .type(type)
-	            .fieldId(type);
+        return entry(type, type);
 	}
-	CardTypeEntry entry(String type, String fieldId) {
-	    return CardTypeEntry.builder()
-	            .type(type)
-	            .fieldId(fieldId)
-	            .build();
+	CardTypeEntry.CardTypeEntryBuilder entry(String type, String fieldId) {
+	    return entry(type, fieldId, null);
 		
 	}
+    CardTypeEntry.CardTypeEntryBuilder entry(String type, String fieldId, String name) {
+        return CardTypeEntry.builder()
+                .type(type)
+                .fieldId(fieldId)
+                .fieldName(name);
+        
+    }
 	CardTypeEntry.CardTypeEntryBuilder columnsEntry(CardTypeEntryList ...columns ) {
 	    return CardTypeEntry.builder()
 	            .type("columns")

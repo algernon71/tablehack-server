@@ -18,6 +18,7 @@ public class CardTypeEntry implements Serializable {
 
     private String type;
     private String fieldId;
+    private String fieldName;
 	
 	private Map<String, Object> properties;
 	private List<List<CardTypeEntry>> columns;
