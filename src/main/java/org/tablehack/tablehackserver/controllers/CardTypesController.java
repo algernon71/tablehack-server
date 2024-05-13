@@ -139,8 +139,8 @@ public class CardTypesController {
 	    		fields("name","symbol", "description", "actions"), 
         		entries("name","symbol","description")));
         add(cardType("potions", "Dryck", "Drycker",
-	    		fields("name","symbol", "actions"), 
-        		entries("name","description","spacer")));
+	    		fields("name","symbol", "description"), 
+        		entries("name","description")));
         add(cardType("weapon", "Föremål", "Föremål",
 	    		fields("name","card-reference", "symbol", "description"), 
         		entries("name", "symbol", "description"))
