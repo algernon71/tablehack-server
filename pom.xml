@@ -11,7 +11,7 @@
 	</parent>
 	<groupId>org.tablehack</groupId>
 	<artifactId>tablehack-server</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.2-SNAPSHOT</version>
 	<name>tablehack-server</name>
 	<description>Tablehack backend server</description>
 	<properties>
@@ -36,6 +36,10 @@
 		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.mysql</groupId>
+			<artifactId>mysql-connector-j</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.projectlombok</groupId>
