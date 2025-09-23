@@ -8,6 +8,7 @@ public class CardTypeFieldList extends ArrayList<CardTypeField>{
 
     public CardTypeFieldList() {
     }
+    
     public CardTypeFieldList(CardTypeField.CardTypeFieldBuilder ... fields) {
         if (fields != null) {
             for (CardTypeField.CardTypeFieldBuilder field : fields) {
