@@ -3,6 +3,7 @@ package org.tablehack.tablehackserver.db.entities;
 import org.tablehack.tablehackserver.db.CardTypeEntryListConverter;
 import org.tablehack.tablehackserver.db.CardTypeFieldListConverter;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -32,21 +33,26 @@ public class CardType {
     
     @Convert(converter = CardTypeEntryListConverter.class)
     @Lob
+    @Column(length = 32768)
     CardTypeEntryList entries;
     
     @Convert(converter = CardTypeEntryListConverter.class)
     @Lob
+    @Column(length = 32768)
     CardTypeEntryList frontEntries;
     
     @Lob
     @Convert(converter = CardTypeFieldListConverter.class)
+    @Column(length = 32768)
     CardTypeFieldList fields;
     
     @Lob
     @Convert(converter = CardTypeFieldListConverter.class)
+    @Column(length = 32768)
     CardTypeFieldList deckFields;
     
     @Lob
     @Convert(converter = CardTypeFieldListConverter.class)
+    @Column(length = 32768)
     CardTypeFieldList columns;
 }

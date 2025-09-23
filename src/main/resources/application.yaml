@@ -5,8 +5,11 @@ spring:
          max-request-size: 100MB
       
    datasource:
-      url: jdbc:h2:mem:cards
-      driverClassName: org.h2.Driver
+      // url: jdbc:h2:mem:cards
+      url: jdbc:mysql://localhost:3306/tablehack
+      username: tablehack
+      password: tablehack
+      driverClassName: com.mysql.cj.jdbc.Driver
       
    jpa:
       show-sql: false
