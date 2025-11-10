@@ -1,6 +1,9 @@
-package org.tablehack.tablehackserver.monsters;
+package org.tablehack.tablehackserver.data.actions;
 
 import java.io.Serializable;
+
+import org.tablehack.tablehackserver.data.Damage;
+import org.tablehack.tablehackserver.data.Defence;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -13,7 +16,7 @@ import jakarta.persistence.Table;
 import lombok.Data;
 
 @Data
-public class MonsterActionStep implements Serializable {
+public class ActionStep implements Serializable {
 	
 	private String name;
 	private ActionType type;

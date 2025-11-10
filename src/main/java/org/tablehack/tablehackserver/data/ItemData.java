@@ -1,4 +1,4 @@
-package org.tablehack.tablehackserver.monsters;
+package org.tablehack.tablehackserver.data;
 
 import java.io.Serializable;
 import java.util.List;
@@ -23,14 +23,11 @@ import jakarta.persistence.Table;
 import lombok.Data;
 
 @Data
-public class MonsterAction implements Serializable {
-	private String initiative;
-	private Integer count;
+public class ItemData  {
+
+	EquipLocation location;
+	Integer weight;
 	
-	private String title;
-	private Integer targettingId;
-	private String description;
-	
-	private List<MonsterActionStep> steps;
-	private CardAttributes attributes;
+	Defence defence;
+	Damage damage;
 }

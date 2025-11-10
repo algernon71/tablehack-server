@@ -1,4 +1,4 @@
-package org.tablehack.tablehackserver.monsters;
+package org.tablehack.tablehackserver.data.monsters;
 
 
 import java.io.IOException;
@@ -12,12 +12,12 @@ import lombok.extern.slf4j.Slf4j;
 
 @Converter(autoApply = true)
 @Slf4j
-public class CardAttributesConverter implements AttributeConverter<CardAttributes, String> {
+public class MonsterDataConverter implements AttributeConverter<MonsterData, String> {
 
   private final static ObjectMapper objectMapper = new ObjectMapper();
 
   @Override
-  public String convertToDatabaseColumn(CardAttributes meta) {
+  public String convertToDatabaseColumn(MonsterData meta) {
       if (meta == null) {
           return null;
       }
@@ -31,12 +31,12 @@ public class CardAttributesConverter implements AttributeConverter<CardAttribute
   }
 
   @Override
-  public CardAttributes convertToEntityAttribute(String dbData) {
+  public MonsterData convertToEntityAttribute(String dbData) {
       if (dbData == null) {
           return null;
       }
     try {
-      return objectMapper.readValue(dbData, CardAttributes.class);
+      return objectMapper.readValue(dbData, MonsterData.class);
     } catch (IOException ex) {
         log.warn("Failed to convert JSON to send option settings data!", ex);
       return null;

@@ -14,25 +14,26 @@ import jakarta.persistence.Table;
 import lombok.Data;
 
 @Entity
-@Table(name = "encounters")
+@Table(name = "scenes")
 @Data
-public class Encounter {
+public class Scene {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	private String tokenId;
+	private String reference;
 	private String title;
 	private String description;
 
 
+	
 	@Convert(converter = EncounterRowsConverter.class)
 	@Lob
 	@Column(columnDefinition="TEXT")
 	EncounterData data;
 	
 	
-	public void update(Encounter encounter) {
+	public void update(Scene encounter) {
 
 		if (encounter.getDescription() != null) {
 			this.description = encounter.getDescription();

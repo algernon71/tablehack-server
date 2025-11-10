@@ -1,8 +1,10 @@
-package org.tablehack.tablehackserver.monsters;
+package org.tablehack.tablehackserver.data.monsters;
 
 import java.io.Serializable;
 import java.util.List;
 
+import org.tablehack.tablehackserver.data.Defence;
+import org.tablehack.tablehackserver.data.actions.Action;
 import org.tablehack.tablehackserver.db.JSONData;
 import org.tablehack.tablehackserver.db.JSONDataConverter;
 import org.tablehack.tablehackserver.db.entities.Monster;
@@ -24,7 +26,7 @@ import lombok.Data;
 
 @Data
 public class MonsterData  {
-	
+	private DeathData death;
 	private Defence defence = new Defence();
-	private List<MonsterAction> actions = List.of();
+	private List<Action> actions = List.of();
 }

@@ -1,7 +1,7 @@
 package org.tablehack.tablehackserver.db.entities;
 
-import org.tablehack.tablehackserver.data.monsters.MonsterData;
-import org.tablehack.tablehackserver.data.monsters.MonsterDataConverter;
+import org.tablehack.tablehackserver.data.ItemData;
+import org.tablehack.tablehackserver.data.ItemDataConverter;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Convert;
@@ -14,40 +14,34 @@ import jakarta.persistence.Table;
 import lombok.Data;
 
 @Entity
-@Table(name = "monsters")
+@Table(name = "equipment_items")
 @Data
-public class Monster {
+public class EquipmentItem {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	private String reference;
-	private Integer level;
 	private String name;
+	private String reference;
 	private String type;
-	private Integer health;
+	private String subType;
 
 	private String description;
 	private String image;
 
 	
-	@Convert(converter = MonsterDataConverter.class)
+	@Convert(converter = ItemDataConverter.class)
 	@Lob
 	@Column(columnDefinition="TEXT")
-	MonsterData data = new MonsterData();
+	ItemData data = new ItemData();
 	
-	public void update(Monster monster) {
+
+	public void update(EquipmentItem monster) {
 		if (monster.getReference() != null) {
 			this.reference = monster.getReference();
 		}
 		if (monster.getName() != null) {
 			this.name = monster.getName();
-		}
-		if (monster.getLevel() != null) {
-			this.level = monster.getLevel();
-		}
-		if (monster.getHealth() != null) {
-			this.health = monster.getHealth();
 		}
 		if (monster.getType() != null) {
 			this.type = monster.getType();

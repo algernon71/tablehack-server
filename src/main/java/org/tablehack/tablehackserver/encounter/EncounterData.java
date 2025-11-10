@@ -3,11 +3,11 @@ package org.tablehack.tablehackserver.encounter;
 import java.io.Serializable;
 import java.util.List;
 
+import org.tablehack.tablehackserver.data.CardAttributes;
+import org.tablehack.tablehackserver.data.CardAttributesConverter;
 import org.tablehack.tablehackserver.db.JSONData;
 import org.tablehack.tablehackserver.db.JSONDataConverter;
 import org.tablehack.tablehackserver.db.entities.Monster;
-import org.tablehack.tablehackserver.monsters.CardAttributes;
-import org.tablehack.tablehackserver.monsters.CardAttributesConverter;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;

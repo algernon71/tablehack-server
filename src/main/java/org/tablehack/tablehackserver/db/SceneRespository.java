@@ -8,10 +8,11 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.tablehack.tablehackserver.db.entities.Monster;
+import org.tablehack.tablehackserver.db.entities.PlayerCharacter;
+import org.tablehack.tablehackserver.db.entities.Scene;
 
-public interface MonstersRespository extends PagingAndSortingRepository<Monster, Long>, CrudRepository<Monster,Long> {
-	Page<Monster> findAll(Pageable page);
-	Page<Monster> findByIdIn(List<Long> ids, Pageable page);
+public interface SceneRespository extends PagingAndSortingRepository<Scene, Long>, CrudRepository<Scene,Long> {
+	Page<Scene> findAll(Pageable pageable);
+	Page<Scene> findByIdIn(List<Long> ids, Pageable pageable);
 	
-	Optional<Monster> findByReference(String reference);
 }

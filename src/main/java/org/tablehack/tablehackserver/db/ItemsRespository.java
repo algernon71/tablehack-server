@@ -7,11 +7,12 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.PagingAndSortingRepository;
+import org.tablehack.tablehackserver.db.entities.EquipmentItem;
 import org.tablehack.tablehackserver.db.entities.Monster;
 
-public interface MonstersRespository extends PagingAndSortingRepository<Monster, Long>, CrudRepository<Monster,Long> {
-	Page<Monster> findAll(Pageable page);
-	Page<Monster> findByIdIn(List<Long> ids, Pageable page);
+public interface ItemsRespository extends PagingAndSortingRepository<EquipmentItem, Long>, CrudRepository<EquipmentItem,Long> {
+	Page<EquipmentItem> findAll(Pageable pageable);
+	Page<EquipmentItem> findByIdIn(List<Long> ids, Pageable pageable);
 	
-	Optional<Monster> findByReference(String reference);
+	Optional<EquipmentItem> findByReference(String reference);
 }

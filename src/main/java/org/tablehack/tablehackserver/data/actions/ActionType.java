@@ -1,4 +1,4 @@
-package org.tablehack.tablehackserver.monsters;
+package org.tablehack.tablehackserver.data.actions;
 
 public enum ActionType {
 	ATTACK,

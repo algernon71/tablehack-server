@@ -2,6 +2,8 @@ package org.tablehack.tablehackserver.db.entities;
 
 import org.tablehack.tablehackserver.data.CharacterData;
 import org.tablehack.tablehackserver.data.CharacterDataConverter;
+import org.tablehack.tablehackserver.data.actions.Action;
+import org.tablehack.tablehackserver.data.actions.ActionConverter;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Convert;
@@ -14,37 +16,26 @@ import jakarta.persistence.Table;
 import lombok.Data;
 
 @Entity
-@Table(name = "characters")
+@Table(name = "character_actions")
 @Data
-public class PlayerCharacter {
+public class PlayerAction {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	private String name;
 	private String characterClass;
-	private String race;
-	private String image;
 
-	@Lob
-	@Column(columnDefinition="TEXT")
-	private String description;
 
 	
-	@Convert(converter = CharacterDataConverter.class)
+	@Convert(converter = ActionConverter.class)
 	@Lob
 	@Column(columnDefinition="TEXT")
-	CharacterData data = new CharacterData();
+	Action action;
 	
-	public void update(PlayerCharacter character) {
-		if (character.getName() != null) {
-			this.name = character.getName();
-		}
-		if (character.getDescription() != null) {
-			this.description = character.getDescription();
-		}
-		if (character.getData() != null) {
-			this.data= character.getData();
+	public void update(PlayerAction action) {
+		if (action.getAction() != null) {
+			this.action = action.getAction();
 		}
 	}
+	
 }
