@@ -1,6 +1,8 @@
 package org.tablehack.tablehackserver.db.entities;
 
-import org.tablehack.tablehackserver.encounter.EncounterData;
+import org.tablehack.tablehackserver.data.SceneData;
+import org.tablehack.tablehackserver.data.SceneDataConverter;
+import org.tablehack.tablehackserver.encounter.Encounter;
 import org.tablehack.tablehackserver.encounter.EncounterRowsConverter;
 
 import jakarta.persistence.Column;
@@ -22,15 +24,15 @@ public class Scene {
 	private Long id;
 	
 	private String reference;
-	private String title;
+	private String name;
 	private String description;
 
 
 	
-	@Convert(converter = EncounterRowsConverter.class)
+	@Convert(converter = SceneDataConverter.class)
 	@Lob
 	@Column(columnDefinition="TEXT")
-	EncounterData data;
+	SceneData data = new SceneData();
 	
 	
 	public void update(Scene encounter) {

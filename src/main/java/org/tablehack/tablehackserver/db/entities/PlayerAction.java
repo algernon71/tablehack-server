@@ -38,4 +38,16 @@ public class PlayerAction {
 		}
 	}
 	
+	public boolean appliesTo(PlayerCharacter character) {
+		if (characterClass == null || characterClass.equals("ALL")) {
+			return true;
+		}
+		
+		if (characterClass.equals(character.getCharacterClass())) {
+			return true;
+		}
+		
+		return false;
+	}
+	
 }

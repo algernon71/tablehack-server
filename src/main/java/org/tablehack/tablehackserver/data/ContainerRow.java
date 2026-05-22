@@ -23,19 +23,11 @@ import jakarta.persistence.Table;
 import lombok.Data;
 
 @Data
-public class ItemData  {
-
-	EquipLocation location;
-	Integer weight;
-	Integer minStrength;
-	Integer minAgility;
-	List<String> classes;
-	Integer charges;
-	Integer durability;
-	Integer sturdiness;
-	Integer value;
-		
+public class ContainerRow  {
+	private String type;
+	private String itemReference;
+	private int count;
 	
-	Defence defence;
-	Damage damage;
+	
+	
 }

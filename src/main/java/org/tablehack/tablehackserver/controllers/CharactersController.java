@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.tablehack.tablehackserver.db.CharactersRespository;
+import org.tablehack.tablehackserver.db.PlayerActionsRespository;
+import org.tablehack.tablehackserver.db.entities.PlayerAction;
 import org.tablehack.tablehackserver.db.entities.PlayerCharacter;
 
 @CrossOrigin(origins = "http://localhost:4300")
@@ -26,42 +28,55 @@ public class CharactersController {
 	@Autowired
 	CharactersRespository characters;
 	
+	@Autowired
+	PlayerActionsRespository actions;
+	
 	@GetMapping
 	public 
-	PagedModel<PlayerCharacter> getMonsters(@RequestParam(name = "ids", required = false) String ids) {
+	PagedModel<PlayerCharacter> getCharacters(@RequestParam(name = "ids", required = false) String ids) {
 		Pageable pageRequest = PageRequest.of(0, 1000);
 		if (ids != null) {
-			return new PagedModel<PlayerCharacter>(characters.findByIdIn(List.of(ids.split(",")).stream().map(s -> Long.parseLong(s)).toList(), pageRequest));
+			List<Long> idList = List.of(ids.split(",")).stream().map(s -> Long.parseLong(s)).toList();
+			return new PagedModel<PlayerCharacter>(characters.findByIdIn(idList, pageRequest).map(ch -> injectStandardActions(ch)));
 		}
-		return new PagedModel<PlayerCharacter>(characters.findAll(pageRequest));
+		return new PagedModel<PlayerCharacter>(characters.findAll(pageRequest).map(ch -> injectStandardActions(ch)));
 	}
 	
 
-	@GetMapping("/{monsterId}")
+	@GetMapping("/{characterId}")
 	public 
-	PlayerCharacter getMonster(@PathVariable Long monsterId) {
-		return characters.findById(monsterId).get();
+	PlayerCharacter getCharacter(@PathVariable Long characterId) {
+		return characters.findById(characterId).map(ch -> injectStandardActions(ch)).get();
 	}
 	
 	@PostMapping
 	public 
-	PlayerCharacter addMonster(@RequestBody PlayerCharacter PlayerCharacter) {
+	PlayerCharacter addCharacter(@RequestBody PlayerCharacter PlayerCharacter) {
 		PlayerCharacter.setId(null);
 		 return characters.save(PlayerCharacter);
 	}
 	
-	@PutMapping("/{monsterId}")
+	@PutMapping("/{characterId}")
 	public 
-	PlayerCharacter updateCard(@PathVariable Long monsterId, @RequestBody PlayerCharacter PlayerCharacter) {
-		PlayerCharacter currentMonster = characters.findById(monsterId).get();
-		currentMonster.update(PlayerCharacter);
+	PlayerCharacter updateCard(@PathVariable Long characterId, @RequestBody PlayerCharacter PlayerCharacter) {
+		PlayerCharacter currentCharacter = characters.findById(characterId).get();
+		currentCharacter.update(PlayerCharacter);
 		return characters.save(PlayerCharacter);
 	}
 	
-	@DeleteMapping("/{monsterId}")
+	@DeleteMapping("/{characterId}")
 	public 
-	void deleteCard(@PathVariable Long monsterId) {
-		PlayerCharacter currentMonster = characters.findById(monsterId).get();
-		characters.delete(currentMonster);
+	void deleteCard(@PathVariable Long characterId) {
+		PlayerCharacter currentCharacter = characters.findById(characterId).get();
+		characters.delete(currentCharacter);
+	}
+	
+	PlayerCharacter injectStandardActions(PlayerCharacter character) {
+		List<PlayerAction> allActions = actions.findAll().stream()
+				.filter(action -> action.appliesTo(character))
+				.toList();
+		
+		character.setStandardActions(allActions);
+		return character;
 	}
 }

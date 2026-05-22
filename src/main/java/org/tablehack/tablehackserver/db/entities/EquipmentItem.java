@@ -24,7 +24,9 @@ public class EquipmentItem {
 	private String name;
 	private String reference;
 	private String type;
+	private String attribute;
 	private String subType;
+	private String category;
 
 	private String description;
 	private String image;

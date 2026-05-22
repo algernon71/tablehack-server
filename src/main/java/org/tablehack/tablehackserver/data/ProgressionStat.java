@@ -6,6 +6,9 @@ import lombok.Data;
 
 
 @Data
-public class CharacterStat  {
+public class ProgressionStat  {
+	Integer startValue;
+	Integer maxValue;
+	String progression;
 	List<Integer> upgradeCosts = List.of();
 }

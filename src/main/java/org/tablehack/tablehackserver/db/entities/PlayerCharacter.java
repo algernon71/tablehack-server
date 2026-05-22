@@ -1,5 +1,8 @@
 package org.tablehack.tablehackserver.db.entities;
 
+import java.util.List;
+
+import org.springframework.data.annotation.Transient;
 import org.tablehack.tablehackserver.data.CharacterData;
 import org.tablehack.tablehackserver.data.CharacterDataConverter;
 
@@ -36,6 +39,9 @@ public class PlayerCharacter {
 	@Column(columnDefinition="TEXT")
 	CharacterData data = new CharacterData();
 	
+	@jakarta.persistence.Transient
+	List<PlayerAction> standardActions;
+	
 	public void update(PlayerCharacter character) {
 		if (character.getName() != null) {
 			this.name = character.getName();
@@ -47,4 +53,5 @@ public class PlayerCharacter {
 			this.data= character.getData();
 		}
 	}
+	
 }

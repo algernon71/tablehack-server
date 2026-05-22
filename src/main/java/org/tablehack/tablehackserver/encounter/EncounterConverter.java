@@ -12,12 +12,12 @@ import lombok.extern.slf4j.Slf4j;
 
 @Converter(autoApply = true)
 @Slf4j
-public class EncounterDataConverter implements AttributeConverter<EncounterData, String> {
+public class EncounterConverter implements AttributeConverter<Encounter, String> {
 
   private final static ObjectMapper objectMapper = new ObjectMapper();
 
   @Override
-  public String convertToDatabaseColumn(EncounterData meta) {
+  public String convertToDatabaseColumn(Encounter meta) {
       if (meta == null) {
           return null;
       }
@@ -31,12 +31,12 @@ public class EncounterDataConverter implements AttributeConverter<EncounterData,
   }
 
   @Override
-  public EncounterData convertToEntityAttribute(String dbData) {
+  public Encounter convertToEntityAttribute(String dbData) {
       if (dbData == null) {
           return null;
       }
     try {
-      return objectMapper.readValue(dbData, EncounterData.class);
+      return objectMapper.readValue(dbData, Encounter.class);
     } catch (IOException ex) {
         log.warn("Failed to convert JSON to send option settings data!", ex);
       return null;

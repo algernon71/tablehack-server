@@ -3,9 +3,12 @@ package org.tablehack.tablehackserver.data;
 import java.io.Serializable;
 import java.util.List;
 
+import org.tablehack.tablehackserver.data.CardAttributes;
+import org.tablehack.tablehackserver.data.CardAttributesConverter;
 import org.tablehack.tablehackserver.db.JSONData;
 import org.tablehack.tablehackserver.db.JSONDataConverter;
 import org.tablehack.tablehackserver.db.entities.Monster;
+import org.tablehack.tablehackserver.encounter.EncounterRow;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -23,19 +26,15 @@ import jakarta.persistence.Table;
 import lombok.Data;
 
 @Data
-public class ItemData  {
-
-	EquipLocation location;
-	Integer weight;
-	Integer minStrength;
-	Integer minAgility;
-	List<String> classes;
-	Integer charges;
-	Integer durability;
-	Integer sturdiness;
-	Integer value;
-		
+public class Loot  {
+	private String tokenId;
+	private String name;
+	private String description;
+	private String image;
+	private Integer count;
+	Integer goldSum;
+	List<LootRow> rows = List.of();
 	
-	Defence defence;
-	Damage damage;
+	CardAttributes attributes = new CardAttributes();
+	
 }
